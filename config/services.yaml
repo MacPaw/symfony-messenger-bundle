@@ -6,3 +6,7 @@ services:
 
   Macpaw\SymfonyMessengerBundle\Middleware\:
     resource: '../src/Middleware/*'
+
+  Macpaw\SymfonyMessengerBundle\Middleware\AddSyncCommandStampMiddleware:
+    arguments:
+      $sendersLocator: '@messenger.senders_locator'
