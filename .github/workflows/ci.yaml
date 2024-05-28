@@ -72,7 +72,7 @@ jobs:
         if: matrix.coverage == 'xdebug'
             
       - name: Upload coverage reports to Codecov
-          if: matrix.coverage == 'xdebug'
-          uses: codecov/codecov-action@v4.0.1
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
+        if: matrix.coverage == 'xdebug'
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
