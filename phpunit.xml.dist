@@ -4,4 +4,12 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
+    <coverage>
+        <include>
+            <directory>./src</directory>
+        </include>
+        <report>
+            <clover outputFile="clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>
