@@ -16,7 +16,7 @@
         "php": ">=8.3",
         "symfony/messenger": "^6.4|^7.0",
         "symfony/http-kernel": "^6.4|^7.0",
-        "doctrine/orm": "^2.7|^3.0",
+        "doctrine/orm": "^3.0",
         "symfony/doctrine-bridge": "^6.4|^7.0",
         "symfony/dependency-injection": "^6.4|^7.0",
         "symfony/config": "^6.4|^7.0"

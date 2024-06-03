@@ -18,9 +18,10 @@ jobs:
           - '6.4.*'
           - '7.0.*'
         include:
-          - php: '8.3'
-            symfony-versions: '^6.4'
-            coverage: 'none'
+          - description: 'Log Code Coverage'
+            php: '8.3'
+            symfony-versions: '^7.0'
+            coverage: xdebug
 
     name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} ${{ matrix.description }}
     steps:
@@ -36,7 +37,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: ${{ matrix.coverage }}
+          coverage: xdebug
 
       - name: Add PHPUnit matcher
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -65,3 +66,13 @@ jobs:
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit
         if: matrix.coverage == 'none'
+        
+      - name: PHPUnit tests and Log Code coverage
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        if: matrix.coverage == 'xdebug'
+            
+      - name: Upload coverage reports to Codecov
+        if: matrix.coverage == 'xdebug'
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
