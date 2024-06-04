@@ -16,7 +16,7 @@ jobs:
         coverage: ['none']
         doctrine-orm-versions:
           - '^2.17'
-          - '^3.0.*'
+          - '^3.0'
         symfony-versions:
           - '6.4.*'
           - '7.0.*'
@@ -24,9 +24,10 @@ jobs:
           - description: 'Log Code Coverage'
             php: '8.3'
             symfony-versions: '^7.0'
+            doctrine-orm-versions: '^3.0'
             coverage: xdebug
 
-    name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} ${{ matrix.description }}
+    name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine ${{ matrix.doctrine-orm-versions }} ${{ matrix.description }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
