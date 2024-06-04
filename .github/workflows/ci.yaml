@@ -14,6 +14,9 @@ jobs:
         php:
           - '8.3'
         coverage: ['none']
+        doctrine-orm-versions:
+          - '^2.17'
+          - '^3.0.*'
         symfony-versions:
           - '6.4.*'
           - '7.0.*'
@@ -57,6 +60,7 @@ jobs:
         if: matrix.symfony-versions != ''
         run: |
           composer require symfony/framework-bundle:${{ matrix.symfony-versions }} --no-update --no-scripts
+          composer require doctrine/orm:${{ matrix.doctrine-orm-versions }} --no-update --no-scripts
           composer require --dev symfony/yaml:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/browser-kit:${{ matrix.symfony-versions }} --no-update --no-scripts
 
@@ -66,11 +70,11 @@ jobs:
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit
         if: matrix.coverage == 'none'
-        
+
       - name: PHPUnit tests and Log Code coverage
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
         if: matrix.coverage == 'xdebug'
-            
+
       - name: Upload coverage reports to Codecov
         if: matrix.coverage == 'xdebug'
         uses: codecov/codecov-action@v4.0.1
